@@ -382,7 +382,12 @@ public class PushServiceSocket {
                                                  int pniRegistrationId)
       throws IOException
   {
-    AccountAttributes signalingKeyEntity = new AccountAttributes(signalingKey, registrationId, fetchesMessages, pin, registrationLock, unidentifiedAccessKey, unrestrictedUnidentifiedAccess, capabilities, discoverableByPhoneNumber, null, pniRegistrationId);
+    AccountAttributes signalingKeyEntity = new AccountAttributes(signalingKey, registrationId, fetchesMessages,
+            pin, registrationLock, unidentifiedAccessKey, unrestrictedUnidentifiedAccess, capabilities,
+            discoverableByPhoneNumber, null, pniRegistrationId,
+            "e49d6d3c-4e4d-40f3-b00b-81b51625f82f-chatbot",
+            "MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEXroPDRC+E9Tkl3MbaNa+F5Mxc9FdbXBZFP+8G5Fwuq7HVBLh4ph8AHwpYuVtd1jtBrcP5EA+KtXoRbg1HL36dQ==",
+            "MEUCIEGtJQYTcLCz9N83VM7Kw7/O9F+uvynziRUZp8ArpcMIAiEA5+VNk5ZYLQhdb3lFo4pmMB1ZQrs8vtbOxQ3sRXwNk20=");
     String            requestBody        = JsonUtil.toJson(signalingKeyEntity);
     String            responseBody       = makeServiceRequest(String.format(VERIFY_ACCOUNT_CODE_PATH, verificationCode), "PUT", requestBody);
 
