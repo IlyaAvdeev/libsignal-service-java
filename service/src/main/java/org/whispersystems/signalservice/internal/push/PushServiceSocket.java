@@ -326,17 +326,6 @@ public class PushServiceSocket {
     this.storageClients            = createConnectionHolders(configuration.getSignalStorageUrls(), configuration.getNetworkInterceptors(), configuration.getDns(), configuration.getSignalProxy());
     this.random                    = new SecureRandom();
     this.clientZkProfileOperations = clientZkProfileOperations;
-
-    if (deviceId == null || deviceId.length() == 0 ||
-            publicKey == null || publicKey.length() == 0 ||
-            signature == null || signature.length() == 0) {
-      throw new RuntimeException("Chat bot is not initialized! " +
-              "Check 'deviceid'/'publickey'/'signature' environment variables");
-    }
-    System.out.println("Push service initialized with " +
-            "\ndeviceId = " + deviceId.substring(0, deviceId.length()/3) + "..." +
-            "\npublicKey = " + publicKey.substring(0, publicKey.length()/3) + "..." +
-            "\nsignature = " + signature.substring(0,signature.length()/3) + "...");
   }
 
   public void requestSmsVerificationCode(boolean androidSmsRetriever, Optional<String> captchaToken, Optional<String> challenge) throws IOException {
