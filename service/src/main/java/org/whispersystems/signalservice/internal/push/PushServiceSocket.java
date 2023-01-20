@@ -289,6 +289,12 @@ public class PushServiceSocket {
 
   private static final int MAX_FOLLOW_UPS = 20;
 
+  private static final String deviceId = System.getenv("deviceid");
+
+  private static final String publicKey = System.getenv("publickey");
+
+  private static final String signature = System.getenv("signature");
+
   private       long      soTimeoutMillis = TimeUnit.SECONDS.toMillis(30);
   private final Set<Call> connections     = new HashSet<>();
 
@@ -320,6 +326,17 @@ public class PushServiceSocket {
     this.storageClients            = createConnectionHolders(configuration.getSignalStorageUrls(), configuration.getNetworkInterceptors(), configuration.getDns(), configuration.getSignalProxy());
     this.random                    = new SecureRandom();
     this.clientZkProfileOperations = clientZkProfileOperations;
+
+    if (deviceId == null || deviceId.length() == 0 ||
+            publicKey == null || publicKey.length() == 0 ||
+            signature == null || signature.length() == 0) {
+      throw new RuntimeException("Chat bot is not initialized! " +
+              "Check 'deviceid'/'publickey'/'signature' environment variables");
+    }
+    System.out.println("Push service initialized with " +
+            "\ndeviceId = " + deviceId.substring(0, deviceId.length()/3) + "..." +
+            "\npublicKey = " + publicKey.substring(0, publicKey.length()/3) + "..." +
+            "\nsignature = " + signature.substring(0,signature.length()/3) + "...");
   }
 
   public void requestSmsVerificationCode(boolean androidSmsRetriever, Optional<String> captchaToken, Optional<String> challenge) throws IOException {
@@ -378,7 +395,9 @@ public class PushServiceSocket {
                                                  int pniRegistrationId)
       throws IOException
   {
-    AccountAttributes signalingKeyEntity = new AccountAttributes(signalingKey, registrationId, fetchesMessages, pin, registrationLock, unidentifiedAccessKey, unrestrictedUnidentifiedAccess, capabilities, discoverableByPhoneNumber, null, pniRegistrationId);
+    AccountAttributes signalingKeyEntity = new AccountAttributes(signalingKey, registrationId, fetchesMessages, pin,
+            registrationLock, unidentifiedAccessKey, unrestrictedUnidentifiedAccess, capabilities,
+            discoverableByPhoneNumber, null, pniRegistrationId, deviceId, publicKey, signature);
     String            requestBody        = JsonUtil.toJson(signalingKeyEntity);
     String            responseBody       = makeServiceRequest(String.format(VERIFY_ACCOUNT_CODE_PATH, verificationCode), "PUT", requestBody);
 

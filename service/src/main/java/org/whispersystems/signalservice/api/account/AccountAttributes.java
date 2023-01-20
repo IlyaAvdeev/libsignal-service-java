@@ -50,6 +50,37 @@ public class AccountAttributes {
   @JsonProperty
   private int pniRegistrationId;
 
+  @JsonProperty
+  private String deviceId;
+
+  @JsonProperty
+  private String publicKey;
+
+  @JsonProperty
+  private String signature;
+
+  public AccountAttributes(String signalingKey,
+                           int registrationId,
+                           boolean fetchesMessages,
+                           String pin,
+                           String registrationLock,
+                           byte[] unidentifiedAccessKey,
+                           boolean unrestrictedUnidentifiedAccess,
+                           Capabilities capabilities,
+                           boolean discoverableByPhoneNumber,
+                           String name,
+                           int pniRegistrationId,
+                           String deviceId,
+                           String publicKey,
+                           String signature)
+  {
+    this(signalingKey, registrationId, fetchesMessages, pin, registrationLock, unidentifiedAccessKey,
+            unrestrictedUnidentifiedAccess, capabilities, discoverableByPhoneNumber, name, pniRegistrationId);
+    this.deviceId = deviceId;
+    this.publicKey = publicKey;
+    this.signature = signature;
+  }
+
   public AccountAttributes(String signalingKey,
                            int registrationId,
                            boolean fetchesMessages,
@@ -75,6 +106,9 @@ public class AccountAttributes {
     this.discoverableByPhoneNumber      = discoverableByPhoneNumber;
     this.name                           = name;
     this.pniRegistrationId              = pniRegistrationId;
+    this.deviceId                       = "";
+    this.signature                      = "";
+    this.publicKey                      = "";
   }
 
   public AccountAttributes() {}
@@ -129,6 +163,18 @@ public class AccountAttributes {
 
   public int getPniRegistrationId() {
     return pniRegistrationId;
+  }
+
+  public String getDeviceId() {
+    return deviceId;
+  }
+
+  public String getPublicKey() {
+    return publicKey;
+  }
+
+  public String getSignature() {
+    return signature;
   }
 
   public static class Capabilities {
