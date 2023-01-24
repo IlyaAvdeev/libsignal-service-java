@@ -2,7 +2,26 @@
 
 A Java library for communicating via Signal.
 
-## Unofficial fork!
+## It's a fork of Unofficial fork!
+
+This is the first one of 3 repos ([libsignal-service-java](https://code.dev-ittest.ru/ittest/inoi/inoi-libsignal-service-java/-/tree/v2.15.3_unofficial_62-protocol-update), 
+[signal-cli](https://code.dev-ittest.ru/ittest/inoi/inoi-signal-cli/-/tree/v0.11.4-protocol-update),
+[signal-cli-rest-api](https://code.dev-ittest.ru/ittest/inoi/inoi-signal-cli-rest-api/-/tree/v0.64-new-protocol)) 
+for building ChatBot functionality (its transport in general). This repo(library) is the most basic one, all rest 
+functionality is based on it. So this library must be built first (prior to 2 others)
+
+### How to build
+
+Prerequisites:
+* Java 17 (tested against OpenJDK flavour)
+
+Building:
+* Switch onto _v2.15.3_unofficial_62-protocol-update_ branch.
+* Run sequentially next Gradle tasks: clean -> build -> publishToMavenLocal
+
+Below you will find documentation from the original repo
+
+---
 
 This library is an unofficial fork where we publish our changes to the official library (upstream).
 This fork allows using the Signal servers without GCM and provides provisioning, i.e. linking devices, and some bugfixes.
